@@ -3274,13 +3274,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba852619fa9bc2d4dbc4a2be8d9e16a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 15
+  velocidad: 20
   camaraPrinc: {fileID: 0}
   posRaycast: {x: 0, y: 0, z: 0}
   animCont: {fileID: 1352887017958798}
   assignAuthorityObj: {fileID: 1657871571907078}
   isFiring: 0
-  timeBetweenShots: 0.6
+  timeBetweenShots: 0.8
+  misilPreFab: {fileID: 0}
   bulletPrefab: {fileID: 1428630123266938, guid: 14a445e0c5d503b468c7146548b11f6e,
     type: 2}
   bulletSpawn: {fileID: 1637568257037112}

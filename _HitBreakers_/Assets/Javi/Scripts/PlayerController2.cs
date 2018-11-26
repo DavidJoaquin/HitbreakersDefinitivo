@@ -61,6 +61,7 @@ public class PlayerController2 : NetworkBehaviour {
 
     public GameObject misilSpawner;
 
+
     // Use this for initialization
     void Start () {
         cdDash = 4f;
@@ -102,8 +103,6 @@ public class PlayerController2 : NetworkBehaviour {
         {
             animCont.GetComponent<Animator>().SetBool("andando", false);
         }
-
-
 
         //creamos un puntero que sale de la camará hacia la posición del ratón
 
@@ -377,9 +376,9 @@ public class PlayerController2 : NetworkBehaviour {
 
 
     private void dash() {
-      
         transform.position += ultimaDireccion * distancia;
         timerDash = cdDash;
+        
         
     }
 }

@@ -121,7 +121,7 @@ TrailRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: d2205fee5760ff54a9f8519c46b62c30, type: 2}
+  - {fileID: 2100000, guid: 6c2ac34085417904cbf88094fb3a8b63, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -149,22 +149,22 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.15112686
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        time: 0.04856275
+        value: 0.5661766
+        inSlope: -0.04107828
+        outSlope: -0.04107828
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.18813784
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: -1.8143947
-        outSlope: -1.8143947
+        inSlope: -1.0346019
+        outSlope: -1.0346019
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.37098157
+        inWeight: 0.17180489
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -217,7 +217,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 2
-  m_Range: 5
+  m_Range: 8
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
