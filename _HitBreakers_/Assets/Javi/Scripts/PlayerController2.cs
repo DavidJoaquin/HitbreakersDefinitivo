@@ -140,13 +140,13 @@ public class PlayerController2 : NetworkBehaviour {
             animCont.GetComponent<Animator>().SetBool("disparando", false);
 
             //Si se pulsa el boton, en este caso el click izquierdo del raton, la variable isFiring pasa a true.
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetButton("Fire1"))
             {
                 isFiring = true;
             }
 
             //Si soltamos el boton, en este caso el click izquierdo del raton, la variable isFiring pasa a false.
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetButtonUp("Fire1"))
             {
                 isFiring = false;
             }
@@ -177,7 +177,7 @@ public class PlayerController2 : NetworkBehaviour {
             }
             
         }
-        if (Input.GetButton("Fire1")) {
+        if (Input.GetButton("Fire2")) {
             if (timerHabilidad1 <= 0)
             {
                 CmdHabilidad1();
@@ -187,7 +187,7 @@ public class PlayerController2 : NetworkBehaviour {
                 timerHabilidad1 -= Time.deltaTime;
             }
         }
-        if (Input.GetButton("Fire2")){
+        if (Input.GetButton("Fire3")){
             if (timerHabilidad2 <= 0)
             {
                     CmdHabilidad2();
@@ -199,7 +199,7 @@ public class PlayerController2 : NetworkBehaviour {
             }
            
         }
-        if (Input.GetButton("Fire3"))
+        if (Input.GetButton(""))
         {
             if (timerHabilidad3 <= 0)
             {
