@@ -1,0 +1,284 @@
+fileFormatVersion: 2
+guid: 2ac6247a3601b5f4a91a1b807a704da8
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: A
+    100002: Armature
+    100004: BackHair_L
+    100006: BackHair_R
+    100008: Body
+    100010: Chest
+    100012: EarsAccessory_L
+    100014: EarsAccessory_R
+    100016: Eye_L
+    100018: Eye_R
+    100020: Flower
+    100022: Head
+    100024: Hips
+    100026: IndexFinger1_L
+    100028: IndexFinger1_R
+    100030: IndexFinger2_L
+    100032: IndexFinger2_R
+    100034: IndexFinger3_L
+    100036: IndexFinger3_R
+    100038: Left ankle
+    100040: Left arm
+    100042: Left elbow
+    100044: Left knee
+    100046: Left leg
+    100048: Left shoulder
+    100050: Left toe
+    100052: Left wrist
+    100054: LittleFinger1_L
+    100056: LittleFinger1_R
+    100058: LittleFinger2_L
+    100060: LittleFinger2_R
+    100062: LittleFinger3_L
+    100064: LittleFinger3_R
+    100066: MiddleFinger1_L
+    100068: MiddleFinger1_R
+    100070: MiddleFinger2_L
+    100072: MiddleFinger2_R
+    100074: MiddleFinger3_L
+    100076: MiddleFinger3_R
+    100078: Neck
+    100080: //RootNode
+    100082: Right ankle
+    100084: Right arm
+    100086: Right elbow
+    100088: Right knee
+    100090: Right leg
+    100092: Right shoulder
+    100094: Right toe
+    100096: Right wrist
+    100098: RingFinger1_L
+    100100: RingFinger1_R
+    100102: RingFinger2_L
+    100104: RingFinger2_R
+    100106: RingFinger3_L
+    100108: RingFinger3_R
+    100110: SideHair_L
+    100112: SideHair_R
+    100114: Skirt_0_0
+    100116: Skirt_0_1
+    100118: Skirt_0_2
+    100120: Skirt_0_3
+    100122: Skirt_0_4
+    100124: Skirt_0_5
+    100126: Skirt_0_6
+    100128: Skirt_0_7
+    100130: Skirt_1_0
+    100132: Skirt_1_1
+    100134: Skirt_1_2
+    100136: Skirt_1_3
+    100138: Skirt_1_4
+    100140: Skirt_1_5
+    100142: Skirt_1_6
+    100144: Skirt_1_7
+    100146: Skirt_2_0
+    100148: Skirt_2_1
+    100150: Skirt_2_2
+    100152: Skirt_2_3
+    100154: Skirt_2_4
+    100156: Skirt_2_5
+    100158: Skirt_2_6
+    100160: Skirt_2_7
+    100162: Spine
+    100164: Thumb0_L
+    100166: Thumb0_R
+    100168: Thumb1_L
+    100170: Thumb1_R
+    100172: Thumb2_L
+    100174: Thumb2_R
+    400000: A
+    400002: Armature
+    400004: BackHair_L
+    400006: BackHair_R
+    400008: Body
+    400010: Chest
+    400012: EarsAccessory_L
+    400014: EarsAccessory_R
+    400016: Eye_L
+    400018: Eye_R
+    400020: Flower
+    400022: Head
+    400024: Hips
+    400026: IndexFinger1_L
+    400028: IndexFinger1_R
+    400030: IndexFinger2_L
+    400032: IndexFinger2_R
+    400034: IndexFinger3_L
+    400036: IndexFinger3_R
+    400038: Left ankle
+    400040: Left arm
+    400042: Left elbow
+    400044: Left knee
+    400046: Left leg
+    400048: Left shoulder
+    400050: Left toe
+    400052: Left wrist
+    400054: LittleFinger1_L
+    400056: LittleFinger1_R
+    400058: LittleFinger2_L
+    400060: LittleFinger2_R
+    400062: LittleFinger3_L
+    400064: LittleFinger3_R
+    400066: MiddleFinger1_L
+    400068: MiddleFinger1_R
+    400070: MiddleFinger2_L
+    400072: MiddleFinger2_R
+    400074: MiddleFinger3_L
+    400076: MiddleFinger3_R
+    400078: Neck
+    400080: //RootNode
+    400082: Right ankle
+    400084: Right arm
+    400086: Right elbow
+    400088: Right knee
+    400090: Right leg
+    400092: Right shoulder
+    400094: Right toe
+    400096: Right wrist
+    400098: RingFinger1_L
+    400100: RingFinger1_R
+    400102: RingFinger2_L
+    400104: RingFinger2_R
+    400106: RingFinger3_L
+    400108: RingFinger3_R
+    400110: SideHair_L
+    400112: SideHair_R
+    400114: Skirt_0_0
+    400116: Skirt_0_1
+    400118: Skirt_0_2
+    400120: Skirt_0_3
+    400122: Skirt_0_4
+    400124: Skirt_0_5
+    400126: Skirt_0_6
+    400128: Skirt_0_7
+    400130: Skirt_1_0
+    400132: Skirt_1_1
+    400134: Skirt_1_2
+    400136: Skirt_1_3
+    400138: Skirt_1_4
+    400140: Skirt_1_5
+    400142: Skirt_1_6
+    400144: Skirt_1_7
+    400146: Skirt_2_0
+    400148: Skirt_2_1
+    400150: Skirt_2_2
+    400152: Skirt_2_3
+    400154: Skirt_2_4
+    400156: Skirt_2_5
+    400158: Skirt_2_6
+    400160: Skirt_2_7
+    400162: Spine
+    400164: Thumb0_L
+    400166: Thumb0_R
+    400168: Thumb1_L
+    400170: Thumb1_R
+    400172: Thumb2_L
+    400174: Thumb2_R
+    2100000: "\u5F8C\u982D\u90E8"
+    2100002: "\u6A2A\u9AEA"
+    2100004: "\u53E3"
+    2100006: "\u767D\u76EE"
+    2100008: "\u6A2A\u9AEA\u8D64"
+    2100010: "\u524D\u9AEA"
+    2100012: "\u77ED\u30D1\u30F3"
+    2100014: "\u80F8\u98FE\u308A"
+    2100016: "\u76EE"
+    2100018: "\u670D"
+    2100020: "\u307E\u3064\u3052"
+    2100022: "\u30D1\u30FC\u30AB\u30FC"
+    2100024: "\u8033"
+    2100026: "\u8DB3"
+    2100028: A
+    2100030: "\u9854"
+    2100032: "\u4F53"
+    2100034: "\u6D99"
+    4300000: Body
+    9500000: //RootNode
+    13700000: Body
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
