@@ -8,7 +8,7 @@ public class PlayerController : NetworkBehaviour {
     //velocidad base de movimiento
     public float velocidad;
     //el parámetro del player
-    private Rigidbody player;
+    private CharacterController player;
     //dirección de movimento
     private Vector3 inputMovimiento;
     //velocidad hacia la dirección de movimiento
@@ -63,7 +63,7 @@ public class PlayerController : NetworkBehaviour {
         distancia = 0.8f;
 
         //asignamos el player al Rigidbody que hemos definido (solo hay uno por ahora, habrá que ver como lo hacemos luego con los items)
-        player = GetComponent<Rigidbody>();
+        player = GetComponent<CharacterController>();
         //lo mismo con la cámara, tendremos que usar tags o algo luego para definir la que queremos
         mainCamera = FindObjectOfType<Camera>();
 
@@ -277,7 +277,7 @@ public class PlayerController : NetworkBehaviour {
     private void FixedUpdate()
     {
         //le decimos que la velocidad del player actualize su posición
-        player.velocity = velocidadMovimiento;
+      //  player.velocity = velocidadMovimiento;
     }
 
 

@@ -187,7 +187,6 @@ GameObject:
   - component: {fileID: 33247052996820844}
   - component: {fileID: 23709911909062184}
   - component: {fileID: 136558081002615190}
-  - component: {fileID: 54925461725210652}
   - component: {fileID: 114585516085554576}
   - component: {fileID: 114612923553093592}
   - component: {fileID: 114257937357334370}
@@ -195,6 +194,7 @@ GameObject:
   - component: {fileID: 114461946137562372}
   - component: {fileID: 95610722491358584}
   - component: {fileID: 114958762913463882}
+  - component: {fileID: 143710903602369594}
   m_Layer: 0
   m_Name: PlayerDefinitivo2
   m_TagString: RecibeDmg
@@ -3291,21 +3291,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1998804106286858}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54925461725210652
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1115457759610806}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 36
-  m_CollisionDetection: 0
 --- !u!65 &65060663738912560
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3675,3 +3660,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.000019520521, y: -0.20557964, z: -0.007976636}
     m_Extent: {x: 0.5238719, y: 0.855024, z: 0.22384058}
   m_DirtyAABB: 0
+--- !u!143 &143710903602369594
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1115457759610806}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
