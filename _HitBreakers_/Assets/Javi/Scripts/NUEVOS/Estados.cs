@@ -6,8 +6,8 @@ using UnityEngine.Networking;
 
 class Estados_a_Enviar
 {
-    public bool b_Avanzar = false;
-    public bool b_Retorceder = false;
+    public bool b_Arriba = false;
+    public bool b_Abajo = false;
     public bool b_Izquierda = false;
     public bool b_Derecha = false;
     public bool b_Habilidad1 = false;
@@ -21,10 +21,10 @@ class Estados_a_Enviar
 
 
 
-public class XEstats : NetworkBehaviour
+public class Estados : NetworkBehaviour
 {
-    public bool b_Avanzar = false;
-    public bool b_Retorceder = false;
+    public bool b_Arriba = false;
+    public bool b_Abajo = false;
     public bool b_Izquierda = false;
     public bool b_Derecha = false;
     public bool b_Habilidad1 = false;
@@ -46,14 +46,14 @@ public class XEstats : NetworkBehaviour
 
 
         if (Input.GetKeyDown(KeyCode.W))
-            enviar.b_Avanzar = true;
+            enviar.b_Arriba = true;
         if (Input.GetKeyUp(KeyCode.W))
-            enviar.b_Avanzar = false;
+            enviar.b_Arriba = false;
 
         if (Input.GetKeyDown(KeyCode.S))
-            enviar.b_Retorceder = true;
+            enviar.b_Abajo = true;
         if (Input.GetKeyUp(KeyCode.S))
-            enviar.b_Retorceder = false;
+            enviar.b_Abajo = false;
 
         if (Input.GetKeyDown(KeyCode.A))
             enviar.b_Izquierda = true;
@@ -107,8 +107,8 @@ public class XEstats : NetworkBehaviour
     [Command]
     void Cmd_Envia_Eventos(Estados_a_Enviar eventos)
     {
-        b_Avanzar = eventos.b_Avanzar;
-        b_Retorceder = eventos.b_Retorceder;
+        b_Arriba = eventos.b_Arriba;
+        b_Abajo = eventos.b_Abajo;
         b_Izquierda = eventos.b_Izquierda;
         b_Derecha = eventos.b_Derecha;
         b_Habilidad1 = eventos.b_Habilidad1;

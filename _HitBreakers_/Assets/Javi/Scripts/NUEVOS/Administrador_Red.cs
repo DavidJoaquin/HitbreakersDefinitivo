@@ -153,6 +153,6 @@ public class Administrador_Red : NetworkManager
         Destroy(go_menu);
     }
     */
-
+    }
 }
 

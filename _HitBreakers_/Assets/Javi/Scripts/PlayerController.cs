@@ -3,12 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+[RequireComponent(typeof(Estados))]
+[RequireComponent(typeof(CharacterController))]
+
 public class PlayerController : NetworkBehaviour {
 
     //velocidad base de movimiento
-    public float velocidad;
+    Vector3 v3_velocidad_horizontal = Vector3.zero;
+    Vector3 v3_velocidad_suelo = Vector3.zero;
+    Vector3 v3_velocidad_vertical = Vector3.zero;
+
+    public Vector3 v3_gravetat = new Vector3(0, -9.8f, 0);
+    public float f_velocitat = 4f;
+    public float f_salto = 2f;
+       
+    Estados estados;
+
     //el parámetro del player
     private CharacterController player;
+
     //dirección de movimento
     private Vector3 inputMovimiento;
     //velocidad hacia la dirección de movimiento
@@ -22,45 +35,20 @@ public class PlayerController : NetworkBehaviour {
 
     public Vector3 posRaycast;
 
-    public GameObject animCont;
-
     public GameObject assignAuthorityObj;
-
-    public bool isFiring;
-
+    //?
     private float shotCounter;
-
+    //?
     public float timeBetweenShots;
 
     public GameObject misilPreFab;
     public GameObject bulletPrefab;
     public GameObject bulletSpawn;
-    public float tiempoVidaBala;
 
-    public float distancia;
-    public float cdDash;
-    public float timerDash;
-
-    public float cdHabilidad1;
-    public float cdHabilidad2;
-    public float cdHabilidad3;
-
-    public float timerHabilidad1;
-    public float timerHabilidad2;
-    public float timerHabilidad3;
 
     // Use this for initialization
     void Start () {
-        cdDash = 4f;
-        cdHabilidad1 = 4f;
-        cdHabilidad2 = 4f;
-        cdHabilidad3 = 4f;
-        timerHabilidad1 = 0f;
-        timerHabilidad2 = 0f;
-        timerHabilidad3 = 0f;
-
-        timerDash = 0f;
-        distancia = 0.8f;
+       
 
         //asignamos el player al Rigidbody que hemos definido (solo hay uno por ahora, habrá que ver como lo hacemos luego con los items)
         player = GetComponent<CharacterController>();
@@ -76,25 +64,87 @@ public class PlayerController : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //dash();
-        //recogemos si se pulsa el eje de horizontal y el de vertical que definimos en la configuración del juego
-        inputMovimiento = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-        //definimos que se mueva en esa dirección con la velocidad base
-        velocidadMovimiento = inputMovimiento * velocidad;
-        ultimaDireccion = velocidadMovimiento;
-        if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+        if (!isServer)
+            return;
+
+        //si toco suelo
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down),
+            out hit, player.height / 2 + 0.1f))
         {
-            animCont.GetComponent<Animator>().SetBool("andando", true);
+            if (hit.transform.GetComponent<Velocidad_Suelo>() != null)
+                transform.parent = hit.transform;
+            else
+                transform.parent = null;
+
+            v3_velocidad_horizontal = Vector3.zero;
+            v3_velocidad_vertical = Vector3.zero;
+            v3_velocidad_suelo = Vector3.zero;
+
+            //moviento horizontal
+            if (estados.b_Arriba)
+            {
+                v3_velocidad_horizontal += new Vector3(0, 0, f_velocitat);
+            }
+            if (estados.b_Abajo)
+            {
+                v3_velocidad_horizontal += new Vector3(0, 0, -f_velocitat);
+            }
+            if (estados.b_Izquierda)
+            {
+                v3_velocidad_horizontal += new Vector3(-f_velocitat, 0, 0);
+            }
+            if (estados.b_Derecha)
+            {
+                v3_velocidad_horizontal += new Vector3(f_velocitat, 0, 0);
+            }
+            //Me la guardo para posible salto
+            /* if (estados.b_Habilidad4)
+             {
+                 v3_velocidad_horizontal += new Vector3(0, f_salto, 0);
+             }
+             */
+
+            if (estados.b_Habilidad1)
+            {
+                
+            }
+
+            if (estados.b_Habilidad2)
+            {
+                
+            }
+
+            if (estados.b_Habilidad3)
+            {
+                
+            }
+
+            if (estados.b_Disparo)
+            {
+                
+            }
+
+            if (estados.b_Definitiva)
+            {
+                
+            }
+          
         }
-        else
+        else //si estoy en el aire
         {
-            animCont.GetComponent<Animator>().SetBool("andando", false);
+            if (transform.parent != null)
+            {
+                v3_velocidad_suelo = transform.parent.GetComponent<Velocidad_Suelo>().v3_velocidad;
+                transform.parent = null;
+            }
         }
 
-
+        v3_velocidad_vertical += (v3_gravetat * Time.deltaTime);
+        player.Move((transform.TransformDirection(v3_velocidad_horizontal) + v3_velocidad_vertical + v3_velocidad_suelo) * Time.deltaTime);
 
         //creamos un puntero que sale de la camará hacia la posición del ratón
-
 
         Ray punteroCamara = mainCamera.ScreenPointToRay(Input.mousePosition);
         //recogemos donde está la superficie, habrá que actualizarlo luego?
@@ -115,127 +165,8 @@ public class PlayerController : NetworkBehaviour {
 
             transform.LookAt(posRaycast);
         }
-      
-        shotCounter -= Time.deltaTime;
-        timerDash -= Time.deltaTime;
-        timerHabilidad1 -= Time.deltaTime;
-        timerHabilidad2 -= Time.deltaTime;
-        timerHabilidad3 -= Time.deltaTime;
-
-        if (isLocalPlayer)
-        {
-
-            animCont.GetComponent<Animator>().SetBool("disparando", false);
-
-            //Si se pulsa el boton, en este caso el click izquierdo del raton, la variable isFiring pasa a true.
-            if (Input.GetMouseButtonDown(0))
-            {
-                isFiring = true;
-            }
-
-            //Si soltamos el boton, en este caso el click izquierdo del raton, la variable isFiring pasa a false.
-            if (Input.GetMouseButtonUp(0))
-            {
-                isFiring = false;
-            }
-        }
-
-        //Si isFiring es true
-        if (isLocalPlayer)
-        {
-            if (isFiring)
-            {
-                CmdFire();
-            }
-            else
-            {
-                shotCounter -= Time.deltaTime;
-            }
-        }
-    
-        if (Input.GetButtonDown("Jump")) {
-            if(timerDash <= 0)
-            {
-                dash();
-            }
-            else
-            {
-                timerDash -= Time.deltaTime;
-            }
-            
-        }
-        if (Input.GetButton("Fire1")) {
-            if (timerHabilidad1 <= 0)
-            {
-                CmdHabilidad1();
-            }
-            else
-            {
-                timerHabilidad1 -= Time.deltaTime;
-            }
-        }
-        if (Input.GetButton("Fire2")){
-            if (timerHabilidad2 <= 0)
-            {
-                //    dash();
-            }
-            else
-            {
-                timerHabilidad2 -= Time.deltaTime;
-            }
-        }
-        if (Input.GetButton("Fire3"))
-        {
-            if (timerHabilidad3 <= 0)
-            {
-                //    dash();
-            }
-            else
-            {
-                timerHabilidad3 -= Time.deltaTime;
-            }
-        }
-    }
-
-    [Command]
-    void CmdFire()
-    {
-        shotCounter -= Time.deltaTime;
-        //Cuando shotCounter llega a 0
-        if (shotCounter <= 0)
-        {
-            //Reiniciamos shotCounter al valor de timeBetweenShots, esto nos permite ajustar el tiempo entre disparos.
-            shotCounter = timeBetweenShots;
-            animCont.GetComponent<Animator>().SetBool("disparando", true);
-            //Instanciamos el objeto bala en la posicion del objeto de referencia firePoint, con su posicion y su rotacion.
-            //    BulletController newBullet = Instantiate(bullet, firePoint.position, firePoint.rotation) as BulletController;
-            //    //Asignamos la velocidad a la bala.
-            //    newBullet.speed = bulletSpeed;
-            //    newBullet.tiempoVida = tiempoVidaBala;
-            //    newBullet.dmgBala = dmgBala;
-
-
-            Debug.Log("DISPARO");
-
-            var bala = (GameObject)Instantiate(
-            bulletPrefab,
-            bulletSpawn.GetComponent<Transform>().position,
-            bulletSpawn.GetComponent<Transform>().rotation);
-
-
-
-
-            // Add velocity to the bullet
-            //    bala.GetComponent<Rigidbody>().velocity = bala.transform.forward * 6;
-
-            // Spawn the bullet on the Clients
-            NetworkServer.Spawn(bala);
-
-            // Destroy the bullet after 2 seconds
-            //    Destroy(bala, tiempoVidaBala);
-
-        }
-    }
+ }
+    /*Recordar como ejemplo habilidad 1
     [Command]
     void CmdHabilidad1()
     {
@@ -273,21 +204,14 @@ public class PlayerController : NetworkBehaviour {
         }
     }
 
-
-    private void FixedUpdate()
-    {
-        //le decimos que la velocidad del player actualize su posición
-      //  player.velocity = velocidadMovimiento;
-    }
+    */
 
 
-
-
-
+     /* Para recordar como hacer el Dash
     private void dash() {
-      
+  
         transform.position += ultimaDireccion * distancia;
-        timerDash = cdDash;
-        
+        timerDash = cdDash;  
     }
+    */
 }
