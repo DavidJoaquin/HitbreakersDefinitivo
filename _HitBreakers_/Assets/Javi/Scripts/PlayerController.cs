@@ -45,127 +45,160 @@ public class PlayerController : NetworkBehaviour {
     public GameObject bulletPrefab;
     public GameObject bulletSpawn;
 
+    public float test;
 
+    
+    
     // Use this for initialization
     void Start () {
-       
 
-        //asignamos el player al Rigidbody que hemos definido (solo hay uno por ahora, habrá que ver como lo hacemos luego con los items)
-        player = GetComponent<CharacterController>();
-        //lo mismo con la cámara, tendremos que usar tags o algo luego para definir la que queremos
-        mainCamera = FindObjectOfType<Camera>();
+        test = 0;
+        
 
-        if (isLocalPlayer)
+        if (!isServer)
         {
-            mainCamera.GetComponent<ControladorCamara>().asignarPlayer(this.gameObject);
+            if (isLocalPlayer)
+            {
+                //lo mismo con la cámara, tendremos que usar tags o algo luego para definir la que queremos
+                mainCamera = FindObjectOfType<Camera>();
+                mainCamera.GetComponent<ControladorCamara>().asignarPlayer(this.gameObject);
+               
+               
+            }
+        }
+        else
+        {
+            player = GetComponent<CharacterController>();
+            estados = gameObject.GetComponent<Estados>(); 
         }
 
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate() {
+
+
+        Debug.Log("frame");
+        test++;
+
+
         if (!isServer)
-            return;
-
-        //si toco suelo
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down),
-            out hit, player.height / 2 + 0.1f))
         {
-            if (hit.transform.GetComponent<Velocidad_Suelo>() != null)
-                transform.parent = hit.transform;
-            else
-                transform.parent = null;
+            //creamos un puntero que sale de la camará hacia la posición del ratón
+            Ray punteroCamara = mainCamera.ScreenPointToRay(Input.mousePosition);
+            //recogemos donde está la superficie, habrá que actualizarlo luego?
+            Plane superficie = new Plane(Vector3.up, Vector3.zero);
+            //creamos un parámetro para la longitud que tendrá el raycast desde la cámara al suelo
+            float longitudPuntero;
 
-            v3_velocidad_horizontal = Vector3.zero;
-            v3_velocidad_vertical = Vector3.zero;
-            v3_velocidad_suelo = Vector3.zero;
+            // Si hay puntero disponible, es decir, que apunta dentro del suelo
+            if (superficie.Raycast(punteroCamara, out longitudPuntero))
+            {
+                // creamos un vector3 que coge la posición del puntero
+                apuntar = punteroCamara.GetPoint(longitudPuntero);
+                // con esto hacemos que el puntero sea visible en el modo debug, para controlar que funciona bien
+                Debug.DrawLine(punteroCamara.origin, apuntar, Color.blue);
+                // aquí hacemos que el player mire hacía el puntero, pero al forzar el eje y a la posicion del jugador, mirará siempre
+                //recto en esa dirección
+                posRaycast = new Vector3(apuntar.x, transform.position.y, apuntar.z);
 
-            //moviento horizontal
-            if (estados.b_Arriba)
-            {
-                v3_velocidad_horizontal += new Vector3(0, 0, f_velocitat);
+                CmdApuntarCursor(posRaycast);             
             }
-            if (estados.b_Abajo)
-            {
-                v3_velocidad_horizontal += new Vector3(0, 0, -f_velocitat);
-            }
-            if (estados.b_Izquierda)
-            {
-                v3_velocidad_horizontal += new Vector3(-f_velocitat, 0, 0);
-            }
-            if (estados.b_Derecha)
-            {
-                v3_velocidad_horizontal += new Vector3(f_velocitat, 0, 0);
-            }
-            //Me la guardo para posible salto
-            /* if (estados.b_Habilidad4)
-             {
-                 v3_velocidad_horizontal += new Vector3(0, f_salto, 0);
-             }
-             */
+        } else {
 
-            if (estados.b_Habilidad1)
-            {
-                
-            }
+            Debug.Log("BArriba = " + estados.b_Arriba);
 
-            if (estados.b_Habilidad2)
+            //si toco suelo
+            RaycastHit hit;
+            /*
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down),
+                out hit, player.height / 2 + 0.1f))
             {
-                
-            }
+                if (hit.transform.GetComponent<Velocidad_Suelo>() != null)
+                    transform.parent = hit.transform;
+                else
+                    transform.parent = null;
+            */
+                v3_velocidad_horizontal = Vector3.zero;
+                v3_velocidad_vertical = Vector3.zero;
+                v3_velocidad_suelo = Vector3.zero;
 
-            if (estados.b_Habilidad3)
-            {
-                
-            }
+                //moviento horizontal
+                if (estados.b_Arriba)
+                {
+                    v3_velocidad_horizontal += new Vector3(0, 0, f_velocitat);
+                }
+                if (estados.b_Abajo)
+                {
+                    v3_velocidad_horizontal += new Vector3(0, 0, -f_velocitat);
+                }
+                if (estados.b_Izquierda)
+                {
+                    v3_velocidad_horizontal += new Vector3(-f_velocitat, 0, 0);
+                }
+                if (estados.b_Derecha)
+                {
+                    v3_velocidad_horizontal += new Vector3(f_velocitat, 0, 0);
+                }
+                //Me la guardo para posible salto
+                /* if (estados.b_Habilidad4)
+                 {
+                     v3_velocidad_horizontal += new Vector3(0, f_salto, 0);
+                 }
+                 */
 
-            if (estados.b_Disparo)
-            {
-                
-            }
+                if (estados.b_Habilidad1)
+                {
 
-            if (estados.b_Definitiva)
-            {
-                
+                }
+
+                if (estados.b_Habilidad2)
+                {
+
+                }
+
+                if (estados.b_Habilidad3)
+                {
+
+                }
+
+                if (estados.b_Disparo)
+                {
+
+                }
+
+                if (estados.b_Definitiva)
+                {
+
+                }
+                /*
             }
-          
+        
+            else //si estoy en el aire
+            {
+                if (transform.parent != null)
+                {
+                    v3_velocidad_suelo = transform.parent.GetComponent<Velocidad_Suelo>().v3_velocidad;
+                    transform.parent = null;
+                }
+            }
+            */
+            v3_velocidad_vertical += (v3_gravetat * Time.deltaTime);
+            player.Move((transform.TransformDirection(v3_velocidad_horizontal) + v3_velocidad_vertical + v3_velocidad_suelo) * Time.deltaTime);
         }
-        else //si estoy en el aire
-        {
-            if (transform.parent != null)
-            {
-                v3_velocidad_suelo = transform.parent.GetComponent<Velocidad_Suelo>().v3_velocidad;
-                transform.parent = null;
-            }
-        }
+   
+        
 
-        v3_velocidad_vertical += (v3_gravetat * Time.deltaTime);
-        player.Move((transform.TransformDirection(v3_velocidad_horizontal) + v3_velocidad_vertical + v3_velocidad_suelo) * Time.deltaTime);
-
-        //creamos un puntero que sale de la camará hacia la posición del ratón
-
-        Ray punteroCamara = mainCamera.ScreenPointToRay(Input.mousePosition);
-        //recogemos donde está la superficie, habrá que actualizarlo luego?
-        Plane superficie = new Plane(Vector3.up, Vector3.zero);
-        //creamos un parámetro para la longitud que tendrá el raycast desde la cámara al suelo
-        float longitudPuntero;
-
-         // Si hay puntero disponible, es decir, que apunta dentro del suelo
-        if (superficie.Raycast(punteroCamara, out longitudPuntero)) {
-            // creamos un vector3 que coge la posición del puntero
-            apuntar = punteroCamara.GetPoint(longitudPuntero);
-            // con esto hacemos que el puntero sea visible en el modo debug, para controlar que funciona bien
-            Debug.DrawLine(punteroCamara.origin, apuntar, Color.blue);
-            // aquí hacemos que el player mire hacía el puntero, pero al forzar el eje y a la posicion del jugador, mirará siempre
-            //recto en esa dirección
-            posRaycast = new Vector3(apuntar.x, transform.position.y, apuntar.z);
-            
-
-            transform.LookAt(posRaycast);
-        }
+        
  }
+
+    [Command]
+    void CmdApuntarCursor(Vector3 posicionMirar)
+    {
+        transform.LookAt(posicionMirar);
+    }
+
+
     /*Recordar como ejemplo habilidad 1
     [Command]
     void CmdHabilidad1()

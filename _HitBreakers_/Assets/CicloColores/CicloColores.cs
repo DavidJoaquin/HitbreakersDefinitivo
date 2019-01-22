@@ -35,7 +35,6 @@ public class CicloColores : MonoBehaviour {
             matt.SetColor("_EmissionColor", color);
             t = 0;
         }
-        Debug.Log(value);
 
             
             value = Mathf.Lerp(lerpIni, 1f, t);

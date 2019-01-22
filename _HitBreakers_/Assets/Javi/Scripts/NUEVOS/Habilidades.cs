@@ -6,11 +6,11 @@ using UnityEngine.Networking;
 
 [RequireComponent(typeof(Estados))]
 
-public class XDipar : NetworkBehaviour
+public class Habilidades : NetworkBehaviour
 {
 
     public GameObject go_proyectil;
-    CharacterController player;
+    PlayerController player;
     public Vector3 v3_origen_balas;
     Estados estados;
 
@@ -20,7 +20,7 @@ public class XDipar : NetworkBehaviour
     {
         if (!isServer)
             return;
-        player = GetComponent<CharacterController>();
+        player = GetComponent<PlayerController>();
         estados = GetComponent<Estados>();
     }
 

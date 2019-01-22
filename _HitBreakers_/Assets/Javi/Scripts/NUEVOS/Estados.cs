@@ -118,5 +118,5 @@ public class Estados : NetworkBehaviour
         b_Recarga = eventos.b_Recarga;
         b_Definitiva = eventos.b_Definitiva;
         b_Disparo = eventos.b_Disparo;
-}
+    }
 }
